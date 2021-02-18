@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="cabecalho">
+        <h4>JOGADOR ATUAL:X</h4>
+        <h4>LINHA SELECIONADA:<span id="linhaSelecionada">-</span></h4>
+        <h4>COLUNA SELECIONADA:<span id="colunaSelecionada">-</span></h4>
+    </div>
+    <div id="principal">
+        <div id="tabuleiro">
+            <div id="linha0">
+                <input type="text" id="celula_0_0" readonly onclick="selecionarCelula(this)" />
+                <input type="text" id="celula_0_1" readonly onclick="selecionarCelula(this)" />
+                <input type=" text" id="celula_0_2" readonly onclick="selecionarCelula(this)" />
+            </div>
+            <div id="linha1">
+                <input type="text" id="celula_1_0" readonly onclick="selecionarCelula(this)" />
+                <input type="text" id="celula_1_1" readonly onclick="selecionarCelula(this)" />
+                <input type="text" id="celula_1_2" readonly onclick="selecionarCelula(this)" />
+            </div>
+            <div id="linha2">
+                <input type="text" id="celula_2_0" readonly onclick="selecionarCelula(this)" />
+                <input type="text" id="celula_2_1" readonly onclick="selecionarCelula(this)" />
+                <input type="text" id="celula_2_2" readonly onclick="selecionarCelula(this)" />
+            </div>
+        </div>
+    </div> <br />
+    <div id="acao">
+        <button>RESETAR</button>
+        <button>FAZER JOGADA</button>
+    </div>
+    <script>
+        //definir o inicio do jogo
+        var matriz3x3 = [['', '', ''], ['', '', ''], ['', '', '']]; //vazio
+        const jogadorX = 'X';//constante
+        const jogadorO = 'O';//constante
+        var jogadaAtual = { jogadorDaRodada: 'X', linha: -1, coluna: -1 };
+
+        function selecionarCelula(pCelula) {
+            console.log(pCelula.id);
+            let posicoes = pCelula.id.split('_');//celula 2 2
+            /*celula_2_0 -> split no _
+             posicao 0 - celula
+             posicao 1 - 2
+             posicao 2 - 0
+            */
+            jogadaAtual.linha = posicoes[1];
+            jogadaAtual.coluna = posicoes[2];
+            document.querySelector('#linhaSelecionada').innerHTML = parseInt(jogadaAtual.linha) + 1;
+            document.querySelector('#colunaSelecionada').innerHTML = parseInt(jogadaAtual.coluna) + 1;
+
+
+
+        }
+
+
+    </script>
+</body>
+
+</html>
