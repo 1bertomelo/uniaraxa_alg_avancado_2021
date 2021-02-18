@@ -43,23 +43,40 @@
         const jogadorX = 'X';//constante
         const jogadorO = 'O';//constante
         var jogadaAtual = { jogadorDaRodada: 'X', linha: -1, coluna: -1 };
-
+        //objeto - > 3 propiedades 
+        //parametro da função -> celula que eu cliquei
         function selecionarCelula(pCelula) {
             console.log(pCelula.id);
-            let posicoes = pCelula.id.split('_');//celula 2 2
-            /*celula_2_0 -> split no _
-             posicao 0 - celula
-             posicao 1 - 2
-             posicao 2 - 0
-            */
+            let posicoes = pCelula.id.split('_');//celula 2 2          
             jogadaAtual.linha = posicoes[1];
             jogadaAtual.coluna = posicoes[2];
-            document.querySelector('#linhaSelecionada').innerHTML = parseInt(jogadaAtual.linha) + 1;
-            document.querySelector('#colunaSelecionada').innerHTML = parseInt(jogadaAtual.coluna) + 1;
+            //verificar se a posicao estao ocupada ou vazia
+            if (matriz3x3[jogadaAtual.linha][jogadaAtual.coluna] === '') {
+                document.querySelector('#linhaSelecionada').innerHTML = parseInt(jogadaAtual.linha) + 1;
+                document.querySelector('#colunaSelecionada').innerHTML = parseInt(jogadaAtual.coluna) + 1;
+                document.querySelector(`#celula_${jogadaAtual.linha}_${jogadaAtual.coluna}`).value
+                    = jogadaAtual.jogadorDaRodada;
+                matriz3x3[jogadaAtual.linha][jogadaAtual.coluna] = jogadaAtual.jogadorDaRodada;
+                passarAVez(jogadaAtual.jogadorDaRodada);
+                console.table(matriz3x3);
 
+            } else {
+                alert('Posição ocupada, tente novamente');
+            }
 
 
         }
+
+        function passarAVez(pJogadorAtual) {
+            if (pJogadorAtual === jogadorX) {
+                jogadaAtual.jogadorDaRodada = jogadorO;
+            }
+            else {
+                jogadaAtual.jogadorDaRodada = jogadorX;
+            }
+        }
+
+
 
 
     </script>
