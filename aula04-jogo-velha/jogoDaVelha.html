@@ -42,7 +42,7 @@
         var matriz3x3 = [['', '', ''], ['', '', ''], ['', '', '']]; //vazio
         const jogadorX = 'X';//constante
         const jogadorO = 'O';//constante
-        var jogadaAtual = { jogadorDaRodada: 'X', linha: -1, coluna: -1 };
+        var jogadaAtual = { jogadorDaRodada: 'X', linha: -1, coluna: -1, nroJogadas: 0 };
         //objeto - > 3 propiedades 
         //parametro da função -> celula que eu cliquei
         function selecionarCelula(pCelula) {
@@ -57,13 +57,78 @@
                 document.querySelector(`#celula_${jogadaAtual.linha}_${jogadaAtual.coluna}`).value
                     = jogadaAtual.jogadorDaRodada;
                 matriz3x3[jogadaAtual.linha][jogadaAtual.coluna] = jogadaAtual.jogadorDaRodada;
-                passarAVez(jogadaAtual.jogadorDaRodada);
+                jogadaAtual.nroJogadas++;
+                //se teve uma vitoria
+                // 0 - nao teve vitoria   // 1 - teve vitoria  // 2 - velha - empate                
+                let resultado = verificarVitoria(matriz3x3);
+                if (resultado === 1) {
+                    alert(`Jogador ${jogadaAtual.jogadorDaRodada} você venceu!`);
+                }
+                else {
+                    if (resultado === 2) {
+                        alert(`Deu velha!`);
+                    }
+                    else {
+                        passarAVez(jogadaAtual.jogadorDaRodada);
+                    }
+                }
                 console.table(matriz3x3);
-
             } else {
                 alert('Posição ocupada, tente novamente');
             }
 
+
+        }
+
+        function verificarVitoria(pMatriz) {
+            //linhas
+            if (pMatriz[0][0] === pMatriz[0][1] && pMatriz[0][0] === pMatriz[0][2]
+                && pMatriz[0][0] !== ''
+            ) {
+                return 1;
+            }
+            if (pMatriz[1][0] === pMatriz[1][1] && pMatriz[1][0] === pMatriz[1][2]
+                && pMatriz[1][0] !== ''
+            ) {
+                return 1;
+            }
+            if (pMatriz[2][0] === pMatriz[2][1] && pMatriz[2][0] === pMatriz[2][2]
+                && pMatriz[2][0] !== ''
+            ) {
+                return 1;
+            }
+            // colunas
+            if (pMatriz[0][0] === pMatriz[1][0] && pMatriz[0][0] === pMatriz[2][0]
+                && pMatriz[0][0] !== '') {
+                return 1;
+            }
+            if (pMatriz[0][1] === pMatriz[1][1] && pMatriz[0][1] === pMatriz[2][1]
+                && pMatriz[0][1] !== ''
+            ) {
+                return 1;
+            }
+            if (pMatriz[0][2] === pMatriz[1][2] && pMatriz[0][2] === pMatriz[2][2]
+                && pMatriz[0][2] !== ''
+            ) {
+                return 1;
+            }
+            //diagonais
+            if (pMatriz[0][2] === pMatriz[1][1] && pMatriz[0][2] === pMatriz[2][0]
+                && pMatriz[0][2] !== ''
+            ) {
+                return 1;
+            }
+            if (pMatriz[0][0] === pMatriz[1][1] && pMatriz[0][0] === pMatriz[2][2]
+                && pMatriz[0][0] !== ''
+            ) {
+                return 1;
+            }
+            //ver se todas as posiçõe estao preenchidas e nao houve vitoria
+            //se contador de jogadas, realizei 9 jogadas e nao houve vitoria
+            if (jogadaAtual.nroJogadas === 9) {
+                return 2;
+            }
+            return 0;
 
         }
 
