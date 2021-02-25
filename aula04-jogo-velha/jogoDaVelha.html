@@ -4,39 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Document</title>
 </head>
 
 <body>
-    <div id="cabecalho">
-        <h4>JOGADOR ATUAL:X</h4>
-        <h4>LINHA SELECIONADA:<span id="linhaSelecionada">-</span></h4>
-        <h4>COLUNA SELECIONADA:<span id="colunaSelecionada">-</span></h4>
-    </div>
-    <div id="principal">
-        <div id="tabuleiro">
-            <div id="linha0">
-                <input type="text" id="celula_0_0" readonly onclick="selecionarCelula(this)" />
-                <input type="text" id="celula_0_1" readonly onclick="selecionarCelula(this)" />
-                <input type=" text" id="celula_0_2" readonly onclick="selecionarCelula(this)" />
-            </div>
-            <div id="linha1">
-                <input type="text" id="celula_1_0" readonly onclick="selecionarCelula(this)" />
-                <input type="text" id="celula_1_1" readonly onclick="selecionarCelula(this)" />
-                <input type="text" id="celula_1_2" readonly onclick="selecionarCelula(this)" />
-            </div>
-            <div id="linha2">
-                <input type="text" id="celula_2_0" readonly onclick="selecionarCelula(this)" />
-                <input type="text" id="celula_2_1" readonly onclick="selecionarCelula(this)" />
-                <input type="text" id="celula_2_2" readonly onclick="selecionarCelula(this)" />
-            </div>
+        <div id="cabecalho" >
+            <h4>JOGADOR ATUAL:X</h4>
+            <h4>LINHA SELECIONADA:<span id="linhaSelecionada">-</span></h4>
+            <h4>COLUNA SELECIONADA:<span id="colunaSelecionada">-</span></h4>
         </div>
-    </div> <br />
-    <div id="acao">
-        <button>RESETAR</button>
-        <button>FAZER JOGADA</button>
-    </div>
+        <div id="principal">
+            <div id="tabuleiro" >
+                <div id="linha0" >
+                    <input type="text" id="celula_0_0" readonly onclick="selecionarCelula(this.id)" />
+                    <input type="text" id="celula_0_1" readonly onclick="selecionarCelula(this.id)" />
+                    <input type=" text" id="celula_0_2" readonly onclick="selecionarCelula(this.id)" />
+                </div>
+                <div id="linha1" >
+                    <input type="text" id="celula_1_0" readonly onclick="selecionarCelula(this.id)" />
+                    <input type="text" id="celula_1_1" readonly onclick="selecionarCelula(this.id)" />
+                    <input type="text" id="celula_1_2" readonly onclick="selecionarCelula(this.id)" />
+                </div>
+                <div id="linha2" >
+                    <input type="text" id="celula_2_0" readonly onclick="selecionarCelula(this.id)" />
+                    <input type="text" id="celula_2_1" readonly onclick="selecionarCelula(this.id)" />
+                    <input type="text" id="celula_2_2" readonly onclick="selecionarCelula(this.id)" />
+                </div>
+            </div>
+        </div> <br />
+        <div id="acao">
+            <button onclick="resetarJogo()">RESETAR</button>           
+        </div>
+    
     <script>
         //definir o inicio do jogo
         var matriz3x3 = [['', '', ''], ['', '', ''], ['', '', '']]; //vazio
@@ -46,14 +46,14 @@
         //objeto - > 3 propiedades 
         //parametro da função -> celula que eu cliquei
         function selecionarCelula(pCelula) {
-            console.log(pCelula.id);
-            let posicoes = pCelula.id.split('_');//celula 2 2          
+            console.log(pCelula);
+            let posicoes = pCelula.split('_');//celula 2 2          
             jogadaAtual.linha = posicoes[1];
             jogadaAtual.coluna = posicoes[2];
             //verificar se a posicao estao ocupada ou vazia
             if (matriz3x3[jogadaAtual.linha][jogadaAtual.coluna] === '') {
-                document.querySelector('#linhaSelecionada').innerHTML = parseInt(jogadaAtual.linha) + 1;
-                document.querySelector('#colunaSelecionada').innerHTML = parseInt(jogadaAtual.coluna) + 1;
+            //    document.querySelector('#linhaSelecionada').innerHTML = parseInt(jogadaAtual.linha) + 1;
+            //    document.querySelector('#colunaSelecionada').innerHTML = parseInt(jogadaAtual.coluna) + 1;
                 document.querySelector(`#celula_${jogadaAtual.linha}_${jogadaAtual.coluna}`).value
                     = jogadaAtual.jogadorDaRodada;
                 matriz3x3[jogadaAtual.linha][jogadaAtual.coluna] = jogadaAtual.jogadorDaRodada;
@@ -70,6 +70,9 @@
                     }
                     else {
                         passarAVez(jogadaAtual.jogadorDaRodada);
+                        if (jogadaAtual.jogadorDaRodada === jogadorO) {
+                            jogadaComputador();
+                        }
                     }
                 }
                 console.table(matriz3x3);
@@ -141,7 +144,27 @@
             }
         }
 
+        function jogadaComputador() {
+            let achou = false;
+            while (!achou) {
+                let linhaSorteada = Math.floor(Math.random() * 3);// entre 0 e 1 e 2.
+                let colunaSorteada = Math.floor(Math.random() * 3);// entre 0 e 1 e 2.
+                console.log(linhaSorteada);
+                console.log(colunaSorteada);
 
+                if (matriz3x3[linhaSorteada][colunaSorteada] === '') {
+                    //entao jogadar la
+                    console.log(`celula_${linhaSorteada}_${colunaSorteada}`);
+                    selecionarCelula(`celula_${linhaSorteada}_${colunaSorteada}`);
+                    return true;
+                }
+            }
+        }
+
+        function resetarJogo(){           
+            //refresh = voltar ao estado inicial
+            document.location.reload();
+        }
 
 
     </script>
