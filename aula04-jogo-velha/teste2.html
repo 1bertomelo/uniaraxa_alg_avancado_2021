@@ -6,33 +6,127 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .imagens {
+            width: 100px;
+            height: 100px;
+            padding: 20px 20px;
+            border: 1px solid blue;
+        }
+
+        .linhas {
+            border: 1px solid red;
+        }
+    </style>
+
 </head>
 
 <body>
-    <img id="teste" src="img/1.png" width="100px" height="100px" 
-    onclick="trocar(this)">
-    
-    <img id="teste2" src="img/1.png" width="100px" height="100px" 
-    
-    onclick="trocar(this)">
-    
-    <img id="teste3" src="img/1.png" width="100px" height="100px" 
-    onclick="trocar(this)">
+    <div id="tabuleiro">
+        <div id="linha1" class="linhas">
+            <img id="img_1_1" src="./img/0.png" class="imagens" onclick="virarCarta(this)" />
+            <img id="img_1_2" src="./img/0.png" class="imagens" />
+            <img id="img_1_3" src="./img/0.png" class="imagens" />
+            <img id="img_1_4" src="./img/0.png" class="imagens" />
+            <img id="img_1_5" src="./img/0.png" class="imagens" />
+            <img id="img_1_6" src="./img/0.png" class="imagens" />
+        </div>
+        <div id="linha2" class="linhas">
+            <img id="img_2_1" src="./img/0.png" class="imagens" />
+            <img id="img_2_2" src="./img/0.png" class="imagens" />
+            <img id="img_2_3" src="./img/0.png" class="imagens" />
+            <img id="img_2_4" src="./img/0.png" class="imagens" />
+            <img id="img_2_5" src="./img/0.png" class="imagens" />
+            <img id="img_2_6" src="./img/0.png" class="imagens" />
+        </div>
+        <button onclick="sortearCartas()">Sortear</button>
+    </div>
 
-    <img id="teste4" src="img/1.png" width="100px" height="100px" 
-    onclick="trocar(this)">
     <script>
-//O(1)
-// matriz ela com todas as cartas de "costas"
-        var matriz = [['1.png','1.png','1.png','1.png']];
+        var arrayImagens = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6];
+        var tabuleiro2x6 = [[, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
+        //0 zero significa que eu ainda nao coloquei carta no tabuleiro.
+        console.log(arrayImagens);
+        console.log(tabuleiro2x6);
 
-        function trocar(pImg) {                        
-            if( pImg.src === "http://127.0.0.1:5500/img/1.png")
+        function sortearCartas() {
+            let valorSorteado = 0;
+            let posicaoSorteado = 0;
+            let linha = 0;
+            let coluna = 0;
+            //enquanto eu tenho cartas, faz sorteio
+            while (arrayImagens.length > 0) {
+                posicaoSorteado = Math.floor(Math.random() * arrayImagens.length);
+                console.log('oi');
+                console.log(`Posicao ${posicaoSorteado}`);
+                console.log(`Tamanho ${arrayImagens.length}`);
+                console.log(arrayImagens);
+
+                //gera numeros inteiro entre 0 e 11. 
+                //gera numeros inteiro entre 0 e 10.
+                //gera numeros inteiro entre 0 e 9
+                valorSorteado = arrayImagens[posicaoSorteado];
+                //ex. 7 me da quem ta na posicao 7 = valor 4
+                tabuleiro2x6[linha][coluna] = valorSorteado;
+                coluna++;
+                if (coluna === 6) {
+                    coluna = 0;
+                    linha++;
+                }
+                arrayImagens.splice(posicaoSorteado, 1);
+            }
+            console.log(arrayImagens);
+            console.log(tabuleiro2x6);
+        }
+
+        function virarCarta(pImagem) {
+            console.log(pImagem);
+            let posicao = pImagem.id.split('_');
+            console.log(posicao);
+            let imagem = tabuleiro2x6[posicao[1] - 1][posicao[2] - 1];
+
+            if (pImagem.src === "http://127.0.0.1:5500/img/0.png")
+                pImagem.src = `img/${imagem}.png`;
+
+        }
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--
+    <img id="teste" src="img/1.png" width="100px" height="100px" onclick="trocar(this)">
+
+    <img id="teste2" src="img/1.png" width="100px" height="100px" onclick="trocar(this)">
+
+    <img id="teste3" src="img/1.png" width="100px" height="100px" onclick="trocar(this)">
+
+    <img id="teste4" src="img/1.png" width="100px" height="100px" onclick="trocar(this)">
+    <script>
+        //O(1)
+        // matriz ela com todas as cartas de "costas"
+
+        var matriz = [[1, 1, 2, 2]];//embaralhar gerar numeros aleatorios e colocar na matriz.
+        //gerar numeros aleatorios 1 e 18.
+
+        function trocar(pImg) {
+            if (pImg.src === "http://127.0.0.1:5500/img/1.png")
                 pImg.src = "img/2.png";
             else
                 pImg.src = "img/1.png";
         }
     </script>
+    -->
 </body>
 
 </html>
