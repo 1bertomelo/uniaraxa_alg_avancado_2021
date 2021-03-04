@@ -25,11 +25,11 @@
     <div id="tabuleiro">
         <div id="linha1" class="linhas">
             <img id="img_1_1" src="./img/0.png" class="imagens" onclick="virarCarta(this)" />
-            <img id="img_1_2" src="./img/0.png" class="imagens" />
-            <img id="img_1_3" src="./img/0.png" class="imagens" />
-            <img id="img_1_4" src="./img/0.png" class="imagens" />
-            <img id="img_1_5" src="./img/0.png" class="imagens" />
-            <img id="img_1_6" src="./img/0.png" class="imagens" />
+            <img id="img_1_2" src="./img/0.png" class="imagens" onclick="virarCarta(this)" />
+            <img id="img_1_3" src="./img/0.png" class="imagens" onclick="virarCarta(this)" />
+            <img id="img_1_4" src="./img/0.png" class="imagens" onclick="virarCarta(this)" />
+            <img id="img_1_5" src="./img/0.png" class="imagens" onclick="virarCarta(this)" />
+            <img id="img_1_6" src="./img/0.png" class="imagens" onclick="virarCarta(this)" />
         </div>
         <div id="linha2" class="linhas">
             <img id="img_2_1" src="./img/0.png" class="imagens" />
@@ -44,7 +44,10 @@
 
     <script>
         var arrayImagens = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6];
-        var tabuleiro2x6 = [[, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
+        var tabuleiro2x6 = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
+        var qtdeCartasViradas = 0;
+        var imagemAnteriorSelecionada = '';
+        var imagemAnterior = '';
         //0 zero significa que eu ainda nao coloquei carta no tabuleiro.
         console.log(arrayImagens);
         console.log(tabuleiro2x6);
@@ -80,16 +83,42 @@
         }
 
         function virarCarta(pImagem) {
-            console.log(pImagem);
+            // console.log(pImagem.src);
             let posicao = pImagem.id.split('_');
-            console.log(posicao);
-            let imagem = tabuleiro2x6[posicao[1] - 1][posicao[2] - 1];
+            //  console.log(posicao);
+            let imagemAtual = tabuleiro2x6[posicao[1] - 1][posicao[2] - 1];
+            //  console.log(`imagem ${imagem}`);
+            if (pImagem.src === "http://127.0.0.1:5500/img/0.png") {
+                pImagem.src = `img/${imagemAtual}.png`;
+                qtdeCartasViradas++;
+                console.log(`Qtde cartas viradas ${qtdeCartasViradas}`);
+                if (qtdeCartasViradas === 2) {
+                    //verificar se elas sao iguais
+                    if (imagemAnteriorSelecionada === imagemAtual) {
+                        setTimeout(function () {
+                            alert('Acertou!! UUURRRUULLL!!');
+                        }, 800);
 
-            if (pImagem.src === "http://127.0.0.1:5500/img/0.png")
-                pImagem.src = `img/${imagem}.png`;
+                        qtdeCartasViradas = 0;
+                    } else {
+                        setTimeout(function () {
+                            alert('Que pena!! Tente de novo!!');
+                            qtdeCartasViradas = 0;
+                            pImagem.src = `img/0.png`;//carta atual
+                            imagemAnterior.src = `img/0.png` //carta anterior na posica 'de costas' 
+                        }, 800);
+                    }
 
+                } else {
+                    imagemAnteriorSelecionada = imagemAtual;
+                    imagemAnterior = pImagem;
+                }
+            }
         }
 
+        function verificarJogada() {
+
+        }
     </script>
 
 
