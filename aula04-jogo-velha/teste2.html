@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+
         .imagens {
             width: 100px;
             height: 100px;
@@ -22,7 +23,12 @@
 </head>
 
 <body>
-    <div id="tabuleiro">
+    <div id="tabuleiro" class="cTabuleiro">
+        <div class="acoes">
+            <h1 id="relogio">Tempo:<SPAN>00:</SPAN><span id="segundos">30</span></h1>
+            <button onclick="iniciarJogo()" class="botoes">Iniciar Jogo</button>
+
+        </div>
         <div id="linha1" class="linhas">
             <img id="img_1_1" src="./img/0.png" class="imagens" onclick="virarCarta(this)" />
             <img id="img_1_2" src="./img/0.png" class="imagens" onclick="virarCarta(this)" />
@@ -39,7 +45,7 @@
             <img id="img_2_5" src="./img/0.png" class="imagens" />
             <img id="img_2_6" src="./img/0.png" class="imagens" />
         </div>
-        <button onclick="sortearCartas()">Sortear</button>
+        <button onclick="sortearCartas()"  class="botoes">Sortear</button>
     </div>
 
     <script>
@@ -48,6 +54,7 @@
         var qtdeCartasViradas = 0;
         var imagemAnteriorSelecionada = '';
         var imagemAnterior = '';
+        var contador = 30;
         //0 zero significa que eu ainda nao coloquei carta no tabuleiro.
         console.log(arrayImagens);
         console.log(tabuleiro2x6);
@@ -116,46 +123,23 @@
             }
         }
 
-        function verificarJogada() {
+        function iniciarJogo() {
 
+            if (contador === 0) {
+                console.log('acabou');
+                clearTimeout(iniciarJogo);
+            }
+            else {
+                contador--;
+                document.querySelector('#segundos').innerHTML =
+                    //if ternario
+                    //if em uma unica linha de codico
+                    //condicao ? true : false
+                    contador < 10 ? '0' + contador : contador;
+                setTimeout(iniciarJogo, 1000);
+            }           
         }
     </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!--
-    <img id="teste" src="img/1.png" width="100px" height="100px" onclick="trocar(this)">
-
-    <img id="teste2" src="img/1.png" width="100px" height="100px" onclick="trocar(this)">
-
-    <img id="teste3" src="img/1.png" width="100px" height="100px" onclick="trocar(this)">
-
-    <img id="teste4" src="img/1.png" width="100px" height="100px" onclick="trocar(this)">
-    <script>
-        //O(1)
-        // matriz ela com todas as cartas de "costas"
-
-        var matriz = [[1, 1, 2, 2]];//embaralhar gerar numeros aleatorios e colocar na matriz.
-        //gerar numeros aleatorios 1 e 18.
-
-        function trocar(pImg) {
-            if (pImg.src === "http://127.0.0.1:5500/img/1.png")
-                pImg.src = "img/2.png";
-            else
-                pImg.src = "img/1.png";
-        }
-    </script>
-    -->
 </body>
 
 </html>
