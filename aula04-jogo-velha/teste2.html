@@ -26,6 +26,7 @@
     <div id="tabuleiro" class="cTabuleiro">
         <div class="acoes">
             <h1 id="relogio">Tempo:<SPAN>00:</SPAN><span id="segundos">30</span></h1>
+            <h1> Pontuação: <span id="pontuacao">0</span></h1>
             <button onclick="iniciarJogo()" class="botoes">Iniciar Jogo</button>
 
         </div>
@@ -55,6 +56,8 @@
         var imagemAnteriorSelecionada = '';
         var imagemAnterior = '';
         var contador = 30;
+        var pontuacao = 0;
+        var qtdCartasRestantes = 18;
         //0 zero significa que eu ainda nao coloquei carta no tabuleiro.
         console.log(arrayImagens);
         console.log(tabuleiro2x6);
@@ -105,8 +108,10 @@
                         setTimeout(function () {
                             alert('Acertou!! UUURRRUULLL!!');
                         }, 800);
-
+                        pontuacao++;
+                        document.querySelector('#pontuacao').innerHTML = pontuacao;
                         qtdeCartasViradas = 0;
+                        qtdCartasRestantes--;
                     } else {
                         setTimeout(function () {
                             alert('Que pena!! Tente de novo!!');
@@ -121,12 +126,15 @@
                     imagemAnterior = pImagem;
                 }
             }
+            if(qtdCartasRestantes === 0){
+                alert("Jogo terminou parabens...");
+            }           
         }
 
         function iniciarJogo() {
 
             if (contador === 0) {
-                console.log('acabou');
+                alert('Infelizmente seu tempo acabou!!! Que pena!!');
                 clearTimeout(iniciarJogo);
             }
             else {
