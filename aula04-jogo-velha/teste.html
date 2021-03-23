@@ -12,6 +12,7 @@
 
 <body>
   <div class="container">
+    <input type="number" />
     <div class="box"><Span>1</Span></div>
     <div class="box"><Span>2</Span></div>
     <div class="box"><Span>3</Span></div>
@@ -19,5 +20,38 @@
     <div class="box"><Span>5</Span></div>
   </div>
 </body>
+<script>
 
+  function sortear(){
+    
+     let sorteio = 0;
+     let i=1;
+     let arrayDigitados = [];
+    
+     let sorteio1 = Math.floor(Math.random() * 21);
+     let sorteio2 = Math.floor(Math.random() * 21);
+     let sorteio3 = Math.floor(Math.random() * 21);
+     let sorteio4 = Math.floor(Math.random() * 21);
+     let sorteio5 = Math.floor(Math.random() * 21);
+     let acerto = 0;
+     if(sorteio1 === num1 || sorteio1 === num2 || sorteio1 === num3 ..){
+      acerto++;
+     }
+
+     if(sorteio2 === num1 || sorteio2 === num2 || sorteio2 === num3 ..){
+      acerto++;
+      }
+
+
+      if(acerto === 5){
+        alert('acertou tudo')
+      }
+      else if (acerto === 0){
+        alert('erro tudo')
+      }
+  }
+
+
+
+</script>
 </html>

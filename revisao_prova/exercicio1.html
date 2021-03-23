@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .verde {
+        color: green;
+        font-size: 18px;
+    }
+
+    .vermelho {
+        font-size: 18px;
+        color: red;
+    }
+</style>
+
+<body>
+    <div>
+        <h1>Jogo da Sorte</h1>
+        <h3>Digite 5 números entre 1 e 20!</h3>
+        <input id="num1" type="number" />
+        <input id="num2" type="number" />
+        <input id="num3" type="number" />
+        <input id="num4" type="number" />
+        <input id="num5" type="number" />
+        <button onclick="iniciarJogo()">Sortear</button>
+    </div>
+    <div>
+        <h1 id="textoSorteados"></h1>
+        <h3 class="vermelho" id="sorteado_1"></h3>
+        <h3 class="vermelho" id="sorteado_2"></h3>
+        <h3 class="vermelho" id="sorteado_3"></h3>
+        <h3 class="vermelho" id="sorteado_4"></h3>
+        <h3 class="vermelho" id="sorteado_5"></h3>
+    </div>
+
+
+    <script>
+
+        function iniciarJogo() {
+            let valor1 = document.querySelector('#num1').value;
+            let valor2 = document.querySelector('#num2').value;
+            let valor3 = document.querySelector('#num3').value;
+            let valor4 = document.querySelector('#num4').value;
+            let valor5 = document.querySelector('#num5').value;
+
+
+            let valoresDigitados = [];
+            let qtdAcerto = 0;
+            valoresDigitados.push(valor1);
+            valoresDigitados.push(valor2);
+            valoresDigitados.push(valor3);
+            valoresDigitados.push(valor4);
+            valoresDigitados.push(valor5);
+            let numerosSorteados = sortear(5, 20);
+            console.log(valoresDigitados);
+            console.log(numerosSorteados);
+            for (let i = 0; i < valoresDigitados.length; i++) {
+                for (let j = 0; j < numerosSorteados.length; j++) {
+                    document.querySelector(`#sorteado_${j + 1}`).innerHTML = numerosSorteados[j];
+                    if (valoresDigitados[i] == numerosSorteados[j]) {
+                        document.querySelector(`#sorteado_${j + 1}`).className = 'verde';
+                        qtdAcerto++;
+                    }
+                }
+            }
+            if (qtdAcerto === 0) {
+                alert('Que pena você errou tudo!!');
+            }
+            else {
+                if (qtdAcerto === 5) {
+                    alert(`Hoje é seu dia de sorte, acertou tudo!!`);
+
+                } else {
+                    alert(`Acertos ${qtdAcerto}`);
+                }
+            }
+            document.querySelector(`#textoSorteados`).innerHTML = 'Números sorteados';
+        }
+
+        function sortear(qtde, maximo) {
+            let i = 0;
+            let sorteados = [];
+            let valorSorteado = 0;
+            while (i < qtde) {
+                valorSorteado = 1 + Math.floor(Math.random() * maximo);
+                if (sorteados.indexOf(valorSorteado) == -1) {
+                    sorteados.push(valorSorteado);
+                    i++;
+                }
+            }
+            return sorteados;
+        }
+
+    </script>
+
+
+</body>
+
+</html>
