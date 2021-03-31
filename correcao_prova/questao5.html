@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" placeholder="Digite o valor da compra" id="totalCompra" />
+    <button onclick="verBrinde()">Ver Brinde</button>
+    <script>
+           function verBrinde(){
+               let totalCompraDigitado = document.getElementById('totalCompra').value;
+              
+               if(totalCompraDigitado <= 100){
+                   //sorteio dos brindes de ate 100
+                    let arrayBrindeAte100 = 
+                    ['Desconto 2,5%','Desconto 3%','Bombom','Ovo de pascoa','2 ovos pascoa'];
+                    let numeroSorteado = Math.floor(Math.random()*arrayBrindeAte100.length);
+                    console.log(numeroSorteado);                    
+                    alert(`Parabéns!! Você ganhou de brinde ${arrayBrindeAte100[numeroSorteado]} 
+                    - posição array : ( ${numeroSorteado})` );                 
+
+                }else {
+                   if(totalCompraDigitado >100 && totalCompraDigitado<= 500){
+                      //sorteio dos brindes entre 100 e 500  
+                      let arrayBrindeEntre100e500 = 
+                    ['Desconto 5%','Desconto 8%','Cesta de choc','Vale compra'];
+                   
+                    let numeroSorteado = Math.floor(Math.random()*arrayBrindeEntre100e500.length);
+                    
+                    alert(`Parabéns!! Você ganhou de brinde ${arrayBrindeEntre100e500[numeroSorteado]} 
+                    - posição array : ( ${numeroSorteado})` );   
+
+                } 
+                else {                      
+                        //sorteio dos brindes acima 500
+                        let numeroSorteado = Math.floor(Math.random()*1000);
+                       alert(`Você está concorrendo a um carro com o número ${numeroSorteado}`);
+                }
+               }
+            }
+
+    </script>
+
+
+</body>
+</html>
