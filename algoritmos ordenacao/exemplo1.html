@@ -28,7 +28,19 @@
         function cadastrarTarefas() {
             let nomeTarefa = document.getElementById('nomeTarefa').value;
             let prioridadeTarefa = parseInt(document.getElementById('prioridadeTarefa').value);
-            let dataTarefa = document.getElementById('dataTarefa').value;
+            let dataTarefa = new Date(document.getElementById('dataTarefa').value);
+            console.log('ano digitado');
+            console.log(dataTarefa.getFullYear());
+            console.log('mes digitado');
+            console.log(dataTarefa.getMonth());
+            //mes considera 0 - 11 
+            let dataAtual = new Date();
+            console.log(dataAtual);
+            console.log('ano atual');
+            console.log(dataAtual.getFullYear());
+            console.log('mes atual');
+            console.log(dataAtual.getMonth());
+
             //criando nova tarefa
             let novaTarefa = { nomeTarefa, prioridadeTarefa, dataTarefa };
             //armazenar no array
