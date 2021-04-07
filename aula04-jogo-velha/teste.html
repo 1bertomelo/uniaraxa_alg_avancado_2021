@@ -22,36 +22,31 @@
 </body>
 <script>
 
-  function sortear(){
-    
-     let sorteio = 0;
-     let i=1;
-     let arrayDigitados = [];
-    
-     let sorteio1 = Math.floor(Math.random() * 21);
-     let sorteio2 = Math.floor(Math.random() * 21);
-     let sorteio3 = Math.floor(Math.random() * 21);
-     let sorteio4 = Math.floor(Math.random() * 21);
-     let sorteio5 = Math.floor(Math.random() * 21);
-     let acerto = 0;
-     if(sorteio1 === num1 || sorteio1 === num2 || sorteio1 === num3 ..){
-      acerto++;
-     }
+  function sortear() {
 
-     if(sorteio2 === num1 || sorteio2 === num2 || sorteio2 === num3 ..){
-      acerto++;
-      }
+    let sorteio = 0;
+    let i = 1;
+    let maximo = 10;
+    let numerosSorteados = [];
+    while (i < maximo) {
+      sorteio = Math.floor(Math.random() * maximo);
+      numerosSorteados.push(sorteio);
+      i++;
+    }
+    console.log(numerosSorteados);
 
-
-      if(acerto === 5){
-        alert('acertou tudo')
-      }
-      else if (acerto === 0){
-        alert('erro tudo')
-      }
   }
 
+  var matriz = [[1, 8, 3], [4, 2, 5]];
 
-
+  function provaMatriz() {
+    for (let i = 0; i < matriz.length; i++) {
+      for (let j = 0; j < matriz[0].length; j++) {
+        console.log(matriz[i][j]);
+      }
+    }
+  }
+  provaMatriz();
 </script>
+
 </html>

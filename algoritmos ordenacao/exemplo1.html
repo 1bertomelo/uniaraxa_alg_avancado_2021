@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Lista de tarefas</h1>
+    <h4>Cadastre suas tarefas</h4>
+    <input type="text" id="nomeTarefa" placeholder="Nome da tarefa" /> <br /><br />
+    <input type="number" id="prioridadeTarefa" placeholder="Prioridade" /> <br /><br />
+    <input type="date" id="dataTarefa" /> <br /><br />
+
+    <button onclick="cadastrarTarefas()">Cadastrar Tarefa</button> <br /><br />
+
+    <button onclick="ordenarNome()">Ordenação Nome</button> <br /><br />
+
+    <button onclick="ordenarPrioridade()">Ordenação Prioridade</button>
+
+    <script>
+
+        var listaTarefas = [];
+
+        function cadastrarTarefas() {
+            let nomeTarefa = document.getElementById('nomeTarefa').value;
+            let prioridadeTarefa = parseInt(document.getElementById('prioridadeTarefa').value);
+            let dataTarefa = document.getElementById('dataTarefa').value;
+            //criando nova tarefa
+            let novaTarefa = { nomeTarefa, prioridadeTarefa, dataTarefa };
+            //armazenar no array
+            listaTarefas.push(novaTarefa);
+            console.log(listaTarefas);
+        }
+
+
+        //logica da ordenacao
+        function ordenacaoNumerica(tarefaA, tarefaB) {
+            if (tarefaA.prioridadeTarefa > tarefaB.prioridadeTarefa)
+                return 1;
+            if (tarefaA.prioridadeTarefa < tarefaB.prioridadeTarefa)
+                return -1;
+            return 0;
+        }
+
+        function ordenarPrioridade() {
+            console.log(listaTarefas.sort(ordenacaoNumerica));
+
+        }
+
+        function ordernacaString(tarefaA, tarefaB) {
+            if (tarefaA.nomeTarefa > tarefaB.nome)
+                return 1;
+            if (tarefaA.nomeTarefa < tarefaB.nome)
+                return -1;
+            return 0;
+        }
+
+        function ordenarNome() {
+            console.log(listaTarefas.sort(ordernacaString));
+        }
+
+    </script>
+
+</body>
+
+</html>
