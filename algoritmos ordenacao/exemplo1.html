@@ -29,7 +29,9 @@
             let nomeTarefa = document.getElementById('nomeTarefa').value;
             let prioridadeTarefa = parseInt(document.getElementById('prioridadeTarefa').value);
             let dataTarefa = new Date(document.getElementById('dataTarefa').value);
-            console.log('ano digitado');
+           
+           //dica pro exercicio 2
+/*            console.log('ano digitado');
             console.log(dataTarefa.getFullYear());
             console.log('mes digitado');
             console.log(dataTarefa.getMonth());
@@ -40,7 +42,7 @@
             console.log(dataAtual.getFullYear());
             console.log('mes atual');
             console.log(dataAtual.getMonth());
-
+*/
             //criando nova tarefa
             let novaTarefa = { nomeTarefa, prioridadeTarefa, dataTarefa };
             //armazenar no array
@@ -51,11 +53,19 @@
 
         //logica da ordenacao
         function ordenacaoNumerica(tarefaA, tarefaB) {
-            if (tarefaA.prioridadeTarefa > tarefaB.prioridadeTarefa)
+            //10 > 8 retonar 1 --> sort troca de lugar 
+            // 8 vim antes do 10
+            if (tarefaA.prioridadeTarefa > tarefaB.prioridadeTarefa)             
                 return 1;
+
+            //7 <8 -1 --> sort ja ta na ordem nao precisa trocar
             if (tarefaA.prioridadeTarefa < tarefaB.prioridadeTarefa)
                 return -1;
+           
             return 0;
+
+            //if regrinha comandos de bloco cuja escopo so tem uma linha
+            //voce pode omitir as chaves
         }
 
         function ordenarPrioridade() {
@@ -63,17 +73,19 @@
 
         }
 
-        function ordernacaString(tarefaA, tarefaB) {
-            if (tarefaA.nomeTarefa > tarefaB.nome)
+        function ordernacaoString(tarefaA, tarefaB) {
+            if (tarefaA.nomeTarefa > tarefaB.nomeTarefa)
                 return 1;
-            if (tarefaA.nomeTarefa < tarefaB.nome)
+            if (tarefaA.nomeTarefa < tarefaB.nomeTarefa)
                 return -1;
             return 0;
         }
 
         function ordenarNome() {
-            console.log(listaTarefas.sort(ordernacaString));
+            console.log(listaTarefas.sort(ordernacaoString));
+           // generate_table(listaTarefas);
         }
+
 
     </script>
 
