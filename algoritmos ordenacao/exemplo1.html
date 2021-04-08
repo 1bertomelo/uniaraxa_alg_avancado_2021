@@ -20,6 +20,9 @@
     <button onclick="ordenarNome()">Ordenação Nome</button> <br /><br />
 
     <button onclick="ordenarPrioridade()">Ordenação Prioridade</button>
+    <br />
+    <br />
+    
 
     <script>
 
@@ -47,7 +50,8 @@
             let novaTarefa = { nomeTarefa, prioridadeTarefa, dataTarefa };
             //armazenar no array
             listaTarefas.push(novaTarefa);
-            console.log(listaTarefas);
+            //console.log(listaTarefas);
+            imprimirTabela(listaTarefas);
         }
 
 
@@ -69,7 +73,7 @@
         }
 
         function ordenarPrioridade() {
-            console.log(listaTarefas.sort(ordenacaoNumerica));
+            imprimirTabela(listaTarefas.sort(ordenacaoNumerica));
 
         }
 
@@ -82,8 +86,73 @@
         }
 
         function ordenarNome() {
-            console.log(listaTarefas.sort(ordernacaoString));
+
+            imprimirTabela(listaTarefas.sort(ordernacaoString));
            // generate_table(listaTarefas);
+        }
+
+
+        function imprimirTabela(tabela){
+            var body = document.getElementsByTagName("body")[0];
+            var tabelaAuxiliar = document.getElementById("tbTarefas");
+            if(tabelaAuxiliar != null){
+                tabelaAuxiliar.remove();
+            }
+
+            var tabelaPrioridadeHTML = document.createElement("table"); 
+            tabelaPrioridadeHTML.id = "tbTarefas";
+            var tabelaBody = document.createElement("tbody");
+            var tabelaHead = document.createElement("thead");
+            
+            var linhaCabecalhoHTML = document.createElement("tr");
+            
+            var colunaCabecalhoNomeHTML = document.createElement("td");
+            var conteudoCabecalhoNome = document.createTextNode('Nome Tarefa');
+            colunaCabecalhoNomeHTML.appendChild(conteudoCabecalhoNome);
+            linhaCabecalhoHTML.appendChild(colunaCabecalhoNomeHTML);
+
+
+            var colunaCabecalhoPrioHTML = document.createElement("td");
+            var conteudoCabecalhoPrio = document.createTextNode('Prioridade');
+            colunaCabecalhoPrioHTML.appendChild(conteudoCabecalhoPrio);
+            linhaCabecalhoHTML.appendChild(colunaCabecalhoPrioHTML);
+
+            var colunaCabecalhoDataHTML = document.createElement("td");
+            var conteudoCabecalhoData = document.createTextNode('Data Tarefa');
+            colunaCabecalhoDataHTML.appendChild(conteudoCabecalhoData);
+            linhaCabecalhoHTML.appendChild(colunaCabecalhoDataHTML);
+
+            tabelaHead.appendChild(linhaCabecalhoHTML);  
+            
+            //for para criar n tarefas
+            //10 tarefas 10 tr
+            //5 tarefas 5 tr
+            for(let nrolinha = 0; nrolinha < tabela.length; nrolinha++){
+                var linhaHTML = document.createElement("tr");
+
+                var colunaNomeHTML = document.createElement("td");
+                var conteudoNome = document.createTextNode(tabela[nrolinha].nomeTarefa);
+                colunaNomeHTML.appendChild(conteudoNome);
+                linhaHTML.appendChild(colunaNomeHTML);   
+                
+
+                var colunaPrioridadeHTML = document.createElement("td");
+                var conteudoPrioridade = document.createTextNode(tabela[nrolinha].prioridadeTarefa);
+                colunaPrioridadeHTML.appendChild(conteudoPrioridade);
+                linhaHTML.appendChild(colunaPrioridadeHTML);   
+                
+                var colunaDataHTML = document.createElement("td");
+                var conteudoData = document.createTextNode(tabela[nrolinha].dataTarefa);
+                colunaDataHTML.appendChild(conteudoData);
+                linhaHTML.appendChild(colunaDataHTML);   
+                                
+                tabelaBody.appendChild(linhaHTML);   
+
+            }
+            tabelaPrioridadeHTML.appendChild(tabelaHead);            
+            tabelaPrioridadeHTML.appendChild(tabelaBody);
+            body.appendChild(tabelaPrioridadeHTML);
+            tabelaPrioridadeHTML.setAttribute("border","1");
         }
 
 
