@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #content {
+            display: flex;
+            flex-direction: column;
+           
+        }
+
+        #content  div {
+            display: flex;
+            flex-direction: row;               
+            margin-top: 20px;
+            
+        }
+
+        #content div  label {
+            font-size: medium;
+            width: 150px;
+        }
+
+        #content div input {
+            font-size: medium;
+            width: 450px;
+        }
+
+        #content div  button {
+          
+            width: 150px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="content">
+        <div>
+            <label>Nome:</label><input id="txtNome" type="text" />
+        </div>
+        <div>
+            <label>Nascimento:</label><input id="txtDtNasc" type="datetime" />
+        </div>
+        <div>
+        <label>Peso:</label><input id="txtpeso" type="number" />
+        </div>
+        <div>
+        <label>Altura:</label><input id="txtpeso" type="number" />
+        </div>
+        <div>
+        <label>Gênero:</label> 
+        <input id="rdRadioM" type="radio" name="genero" value="M" />
+        <label for="rbRadioM">Masculino</label>
+        <input id="rdRadioF" type="radio" name="genero" value="F" />
+        <label for="rbRadioF">Feminino</label>
+    </div>
+    <div>
+        <button onclick="enviar()">Enviar</button>  
+
+    </div>
+   </div>
+   <script>
+       function enviar(){
+           let nome = document.getElementById('txtNome').value;
+           alert(nome);
+           var generoArray = document.getElementsByName("genero");
+            if(generoArray[0].checked)
+                alert('M');
+            else
+                alert('F');
+            
+
+
+       }
+   </script>
+</body>
+</html>
