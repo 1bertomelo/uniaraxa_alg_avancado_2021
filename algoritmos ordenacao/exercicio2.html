@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div>
+            <span>Nome:</span>
+            <input id="nomePessoa" type="text" placeholder="Digite seu nome" />
+        </div>
+        <div>
+            <span>Cpf:</span>
+            <input id="cpfPessoa" type="text" placeholder="Digite seu cpf" maxlength="11" />            
+        </div>
+        <div>
+            <span>Data Nascimento:</span>
+            <input id="dataNascimentoPessoa" type="date" />
+        </div>
+        <div>
+            <button onclick="cadastrarFila()">Cadastrar</button>
+        </div>
+        <div>
+            <button>Ordenar Nomes ASC</button>
+            <button>Ordenar Idade DESC</button>
+        </div>
+    </div>
+    <script>
+        var filaAcima80Anos    = [];
+        var filaEntre60e79Anos = [];
+        var filaEntre40e59Anos = [];
+        var filaAbaixo40Anos   = [];
+
+        function cadastrarFila(){
+            let nome = document.getElementById('nomePessoa').value;
+            let cpf = document.getElementById('cpfPessoa').value;
+            let dataNascimento = new Date(document.getElementById('dataNascimentoPessoa').value);
+
+            let anoNascimento = dataNascimento.getFullYear();
+            let mesNascimento = dataNascimento.getMonth();
+
+            let dataAtual = new Date();
+            let anoAtual = dataAtual.getFullYear();
+            let mesAtual = dataAtual.getMonth(); 
+            //documentação meses 0 - 11 (unidade menor)            
+            let idadePessoaEmAnos = 0;
+            if(mesNascimento > mesAtual){
+                idadePessoaEmAnos = anoAtual-1-anoNascimento;
+            } else {
+                idadePessoaEmAnos = anoAtual-anoNascimento;
+            }
+            console.log(idadePessoaEmAnos);
+            
+            let novoCadastroPessoa = { nome , idadePessoaEmAnos , cpf , dataNascimento};
+            
+            if(idadePessoaEmAnos < 40){
+                filaAbaixo40Anos.push(novoCadastroPessoa);
+            }   
+            else { 
+                    if(idadePessoaEmAnos>=40 && idadePessoaEmAnos <= 59){
+                        filaEntre40e59Anos.push(novoCadastroPessoa);
+                    } 
+                    else {
+                        if(idadePessoaEmAnos>=60 && idadePessoaEmAnos <= 79){
+                            filaEntre60e79Anos.push(novoCadastroPessoa);
+                        }
+                        else {
+                            filaAcima80Anos.push(novoCadastroPessoa);
+                        }
+                    }
+            }
+            console.log(filaAbaixo40Anos);
+            console.log(filaEntre40e59Anos);
+            console.log(filaEntre60e79Anos);
+            console.log(filaAcima80Anos);                    
+        }
+
+
+    </script>
+</body>
+</html>

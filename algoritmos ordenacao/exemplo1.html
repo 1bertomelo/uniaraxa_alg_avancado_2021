@@ -20,9 +20,13 @@
 
     <button onclick="ordenarNome()">Ordenação Nome</button> <br /><br />
 
+    <button onclick="ordenarNomeDesc()">Ordenação Nome Descendente</button> <br /><br />
+
     <button onclick="ordenarPrioridade()">Ordenação Prioridade</button>
     <br />
     <br />
+    <button onclick="ordenarPrioridadeDesc()">Ordenação Prioridade Desc</button>
+
     <script>
 
         var listaTarefas = [];
@@ -31,13 +35,7 @@
             let nomeTarefa = document.getElementById('nomeTarefa').value;
             let prioridadeTarefa = parseInt(document.getElementById('prioridadeTarefa').value);
             let dataTarefa = new Date(document.getElementById('dataTarefa').value);
-            let anoTarefa = dataTarefa.getFullYear();
-            let mesTarefa = dataAtual.getMonth();
-            let dataAtual = new Date();
-            let anoAtual = dataAtual.getFullYear();
-            let mesAtual = dataAtual.getMonth();
-
-            console.log(dataTarefa.getFullYear());
+           
            //dica pro exercicio 2
 /*            console.log('ano digitado');
             console.log(dataTarefa.getFullYear());
@@ -95,12 +93,25 @@
             //solucao
             //lógica da ordem desccendente
             //dica: e a logica invesa da ascendente
+            if (tarefaA.nomeTarefa < tarefaB.nomeTarefa)
+                return 1;
+            if (tarefaA.nomeTarefa > tarefaB.nomeTarefa)
+                return -1;
+            return 0;
 
         }
 
         function ordenaNumericaDesc(tarefaA, tarefaB){
             //solucao
             //dica: e a logica invesa da ascendente
+            if (tarefaA.prioridadeTarefa < tarefaB.prioridadeTarefa)             
+                return 1;
+
+            //7 <8 -1 --> sort ja ta na ordem nao precisa trocar
+            if (tarefaA.prioridadeTarefa > tarefaB.prioridadeTarefa)
+                return -1;
+           
+            return 0;
         }
 
         function ordenarNome() {
@@ -109,7 +120,14 @@
            // generate_table(listaTarefas);
         }
 
+        function ordenarNomeDesc(){
+            imprimirTabela(listaTarefas.sort(ordenacaoStringDesc));
+        }
 
+        function ordenarPrioridadeDesc(){
+            imprimirTabela(listaTarefas.sort(ordenaNumericaDesc));
+        }
+        
         function imprimirTabela(tabela){
             var body = document.getElementsByTagName("body")[0];
             var tabelaAuxiliar = document.getElementById("tbTarefas");
