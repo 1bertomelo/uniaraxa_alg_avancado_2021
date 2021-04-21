@@ -77,10 +77,7 @@
                         }
                     }
             }
-            console.log(filaAbaixo40Anos);
-            console.log(filaEntre40e59Anos);
-            console.log(filaEntre60e79Anos);
-            console.log(filaAcima80Anos);                    
+            ordernarFilaNomeAsc();                 
         }
 
 
@@ -137,17 +134,85 @@
         }
 
         function ordernarFilaNomeAsc(){
-           console.log( filaAbaixo40Anos.sort(ordernarStringAsc));
-           console.log( filaEntre40e59Anos.sort(ordernarStringAsc));
-           console.log(  filaEntre60e79Anos.sort(ordernarStringAsc));
-           console.log( filaAcima80Anos.sort(ordernarStringAsc));
+           imprimirTabela(filaAbaixo40Anos.sort(ordernarStringAsc),"tbfilaAbaixo40Anos");
+           imprimirTabela(filaEntre40e59Anos.sort(ordernarStringAsc),"tbfilaEntre40e59Anos");
+           imprimirTabela(filaEntre60e79Anos.sort(ordernarStringAsc),"tbfilaEntre60e79Anos");
+           imprimirTabela(filaAcima80Anos.sort(ordernarStringAsc),"tbfilaAcima80Anos");
         }
 
         function ordernarFilaIdadeDesc(){
-            console.log( filaAbaixo40Anos.sort(ordernaInteiroDesc));
-            console.log(  filaEntre40e59Anos.sort(ordernaInteiroDesc));
-            console.log(   filaEntre60e79Anos.sort(ordernaInteiroDesc));
-            console.log( filaAcima80Anos.sort(ordernaInteiroDesc));
+            imprimirTabela(filaAbaixo40Anos.sort(ordernaInteiroDesc),"tbfilaAbaixo40Anos");
+            imprimirTabela(filaEntre40e59Anos.sort(ordernaInteiroDesc),"tbfilaEntre40e59Anos");
+            imprimirTabela(filaEntre60e79Anos.sort(ordernaInteiroDesc),"tbfilaEntre60e79Anos");
+            imprimirTabela(filaAcima80Anos.sort(ordernaInteiroDesc),"tbfilaAcima80Anos");
+        }
+
+        function imprimirTabela(tabela, idTabela){
+            if(tabela.length > 0){
+                var body = document.getElementsByTagName("body")[0];
+            var tabelaAuxiliar = document.getElementById(idTabela);
+            if(tabelaAuxiliar != null){
+                tabelaAuxiliar.remove();
+            }
+
+            var tabelaPrioridadeHTML = document.createElement("table"); 
+            tabelaPrioridadeHTML.id = idTabela;
+            var tabelaBody = document.createElement("tbody");
+            var tabelaHead = document.createElement("thead");
+            
+            var linhaCabecalhoHTML = document.createElement("tr");
+            
+            var colunaCabecalhoNomeHTML = document.createElement("td");
+            var conteudoCabecalhoNome = document.createTextNode('Nome Pessoa');
+            colunaCabecalhoNomeHTML.appendChild(conteudoCabecalhoNome);
+            linhaCabecalhoHTML.appendChild(colunaCabecalhoNomeHTML);
+
+
+            var colunaCabecalhoIdadeHTML = document.createElement("td");
+            var conteudoCabecalhoIdade = document.createTextNode('Idade Pessoa');
+            colunaCabecalhoIdadeHTML.appendChild(conteudoCabecalhoIdade);
+            linhaCabecalhoHTML.appendChild(colunaCabecalhoIdadeHTML);
+
+            var colunaCabecalhoCPFHTML = document.createElement("td");
+            var conteudoCabecalhoCPF = document.createTextNode('CPF');
+            colunaCabecalhoCPFHTML.appendChild(conteudoCabecalhoCPF);
+            linhaCabecalhoHTML.appendChild(colunaCabecalhoCPFHTML);
+
+            tabelaHead.appendChild(linhaCabecalhoHTML);  
+            
+            //for para criar n tarefas
+            //10 tarefas 10 tr
+            //5 tarefas 5 tr
+            for(let nrolinha = 0; nrolinha < tabela.length; nrolinha++){
+                var linhaHTML = document.createElement("tr");
+
+                var colunaNomeHTML = document.createElement("td");
+                var conteudoNome = document.createTextNode(tabela[nrolinha].nome);
+                colunaNomeHTML.appendChild(conteudoNome);
+                linhaHTML.appendChild(colunaNomeHTML);   
+                
+
+                var colunaIdadeHTML = document.createElement("td");
+                var conteudoIdade = document.createTextNode(tabela[nrolinha].idadePessoaEmAnos);
+                colunaIdadeHTML.appendChild(conteudoIdade);
+                linhaHTML.appendChild(colunaIdadeHTML);   
+                
+                var colunaCPFHTML = document.createElement("td");
+                var conteudoCPF = document.createTextNode(tabela[nrolinha].cpf);
+                colunaCPFHTML.appendChild(conteudoCPF);
+                linhaHTML.appendChild(colunaCPFHTML);   
+                                
+                tabelaBody.appendChild(linhaHTML);   
+
+            }
+            tabelaPrioridadeHTML.appendChild(tabelaHead);            
+            tabelaPrioridadeHTML.appendChild(tabelaBody);
+            body.appendChild(tabelaPrioridadeHTML);
+            tabelaPrioridadeHTML.setAttribute("border","1");
+
+            }
+           
+            
         }
     </script>
 </body>
