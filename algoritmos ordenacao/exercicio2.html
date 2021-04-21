@@ -41,16 +41,29 @@
 
             let anoNascimento = dataNascimento.getFullYear();
             let mesNascimento = dataNascimento.getMonth();
+            let diaNascimento = dataNascimento.getDate();
 
             let dataAtual = new Date();
             let anoAtual = dataAtual.getFullYear();
             let mesAtual = dataAtual.getMonth(); 
+            let diaAtual = dataAtual.getDate();
+
             //documentação meses 0 - 11 (unidade menor)            
             let idadePessoaEmAnos = 0;
             if(mesNascimento > mesAtual){
                 idadePessoaEmAnos = anoAtual-1-anoNascimento;
             } else {
-                idadePessoaEmAnos = anoAtual-anoNascimento;
+                     if(mesNascimento <  mesAtual ) {
+                        idadePessoaEmAnos = anoAtual-anoNascimento;
+                     }
+                     else { 
+                            if(diaNascimento > diaAtual){
+                                idadePessoaEmAnos = anoAtual-1-anoNascimento;
+                            } 
+                            else{
+                                idadePessoaEmAnos = anoAtual-anoNascimento;
+                            }
+                     }               
             }
             console.log(idadePessoaEmAnos);
             
