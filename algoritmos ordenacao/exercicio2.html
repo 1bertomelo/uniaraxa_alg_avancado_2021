@@ -24,8 +24,8 @@
             <button onclick="cadastrarFila()">Cadastrar</button>
         </div>
         <div>
-            <button>Ordenar Nomes ASC</button>
-            <button>Ordenar Idade DESC</button>
+            <button onclick="ordernarFilaNomeAsc()">Ordenar Nomes ASC</button>
+            <button onclick="ordernarFilaIdadeDesc()">Ordenar Idade DESC</button>
         </div>
     </div>
     <script>
@@ -54,7 +54,12 @@
             }
             console.log(idadePessoaEmAnos);
             
-            let novoCadastroPessoa = { nome , idadePessoaEmAnos , cpf , dataNascimento};
+            let novoCadastroPessoa = { 
+                nome , 
+                idadePessoaEmAnos , 
+                cpf , 
+                dataNascimento
+            };
             
             if(idadePessoaEmAnos < 40){
                 filaAbaixo40Anos.push(novoCadastroPessoa);
@@ -79,6 +84,71 @@
         }
 
 
+        function ordernarStringAsc(pessoaA , pessoaB){
+            if(pessoaA.nome > pessoaB.nome)
+                return 1;//verdade - trocar
+            if(pessoaA.nome < pessoaB.nome)
+                return -1;//nao trocar diferentes
+           
+            return 0;//nao trocar simboliza iguais
+
+        }
+        
+        // "humberto", "Alan", "Germano", "josé", "bruna" -> ordem CadastroPessoa são strings (palavras)
+        //ordernar em ordem alfabetica
+        // resultado : Alan , Germano , Humberto 
+        // humberto > Alan (vem  depois na ordem alfabetica)
+        // verdadeiro - trocar (recursiva olha anterior)
+        // Alan , Humberto , Germano ,jose (neste momento)
+        //Humberto > Germano
+        //verdadeiro = trocar
+        //Alan, Germano, Humberto, José, Bruna (neste momento)
+        // Humberto > Jose (falso)
+        //manter (nao faz troca)
+        // José > Bruna => verdadeiro  = troca
+        //Alan, Germano, Humberto, Bruna, José
+        //olhar anterior Humberto > Bruna (verdadeiro troca)
+        //Alan, Germano, Bruna, Humberto, José
+        //Germano > Bruna (verdadeiro , troca)
+        //Alan > Bruna (falso , não troca)
+        //Alan, Bruna, Germano, Humberto , José (resultado)
+
+        // 7, 18, 36, 9 -> ordem cadastro
+        // desc -> maior para o menor
+        //resultado : 36 , 18, 9 e 7
+        // 7 < 18 trocar (verdadeiro) 
+        // 18, 7 , 36, 9 (neste momento)
+        // 7 < 36 (verdeiro trocar) olhar o anterior
+        // 18, 36, 7, 9 olhar anterior
+        // 18 < 36 (verdaeiro , troca)
+        // 36 , 18 , 7, 9 
+        // 7 < 9 (verdadeiro , troca)
+        //36 , 18, 9 e 7 (olhar anteior)
+        // 18 < 9 (falso, nao tem troca)
+
+
+        function ordernaInteiroDesc(pessoaA, pessoaB){
+            if(pessoaA.idadePessoaEmAnos < pessoaB.idadePessoaEmAnos)
+                return 1;
+            if(pessoaA.idadePessoaEmAnos > pessoaB.idadePessoaEmAnos)
+                return -1;           
+            return 0;
+
+        }
+
+        function ordernarFilaNomeAsc(){
+           console.log( filaAbaixo40Anos.sort(ordernarStringAsc));
+           console.log( filaEntre40e59Anos.sort(ordernarStringAsc));
+           console.log(  filaEntre60e79Anos.sort(ordernarStringAsc));
+           console.log( filaAcima80Anos.sort(ordernarStringAsc));
+        }
+
+        function ordernarFilaIdadeDesc(){
+            console.log( filaAbaixo40Anos.sort(ordernaInteiroDesc));
+            console.log(  filaEntre40e59Anos.sort(ordernaInteiroDesc));
+            console.log(   filaEntre60e79Anos.sort(ordernaInteiroDesc));
+            console.log( filaAcima80Anos.sort(ordernaInteiroDesc));
+        }
     </script>
 </body>
 </html>
