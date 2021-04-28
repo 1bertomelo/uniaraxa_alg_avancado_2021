@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div>
+            <h1>Jogo "Problema de Josephus"</h1>
+        </div>
+        <div>
+            <label>Número para sorteio:</label>
+
+            <input id="numeroSorteio" type="number" />
+        </div>
+        <div>
+            <label>Nome Soldado:</label>
+            <input id="nomeSoldado" type="text" />
+            <button onclick="adicionarSoldado()">+</button>
+        </div>
+        <div>
+            <button onclick="iniciarJogo()">Jogar uma Rodada</button>          
+        </div>       
+    </div>
+    <script>
+        var arraySoldados = [];
+
+        function adicionarSoldado(){
+            let nomeSoldado = document.getElementById("nomeSoldado").value;
+            arraySoldados.push(nomeSoldado);
+            console.log(arraySoldados);           
+        }
+
+        function sortearSoldado(qtde){
+           return  Math.floor(Math.random()*qtde);
+           
+        }
+
+        function iniciarJogo(){
+            let numeroSoldadoSorteado = sortearSoldado(arraySoldados.length);
+            console.log(`soldado sorteado para iniciar: ${arraySoldados[numeroSoldadoSorteado]} `);
+            let numeroSorteio = parseInt(document.getElementById("numeroSorteio").value);
+            let numeroAtual = 1;
+            let posicaoInicio = numeroSoldadoSorteado;
+            while(numeroAtual <= numeroSorteio){                
+                //percorre vetor
+                console.log(`${numeroAtual} | ${numeroSorteio} | ${posicaoInicio}`);
+                console.log(`posição ${numeroAtual} soldado : ${arraySoldados[posicaoInicio]}`);
+                numeroAtual++;
+                posicaoInicio++;
+                if(posicaoInicio === arraySoldados.length){
+                    posicaoInicio = 0;
+                }
+            }
+            if(posicaoInicio > 0){
+                posicaoInicio--; 
+            } else {
+                posicaoInicio = arraySoldados.length-1;
+            }
+            console.log(`Soldado removido é ${arraySoldados[posicaoInicio]}`);
+            arraySoldados.splice(posicaoInicio,1);
+            console.log(arraySoldados);
+            if(arraySoldados.length === 1){
+                alert(`Vencedor foi ${arraySoldados[0]}!!`);
+            }
+        }
+
+
+    </script>
+</body>
+</html>
