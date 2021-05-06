@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Jogar na mega sena</h1>
+    <h3>Faça o seu jogo:</h3>
+    <input id="txtPrimeroNumeroJogado" type="number" name="numerosJogados" />
+    <input id="txtSegundoNumeroJogado" type="number" name="numerosJogados" />
+    <input id="txtTerceiroNumeroJogado" type="number" name="numerosJogados" />
+    <input id="txtQuartoNumeroJogado" type="number" name="numerosJogados" />
+    <input id="txtQuintoNumeroJogado" type="number" name="numerosJogados" />
+    <input id="txtSextoNumeroJogado" type="number" name="numerosJogados" />
+    <button onclick="realizarSorteio()">Jogar</button>
+
+    <script>
+
+        //primeiro erro e o nome da função realizarSorteioX();
+        //segundo erro enviarEmailJogadores();
+        //terceiro if (arrayNumerosSorteados.indexOf(numeroArrayJogado) == -1) {
+        //solucao incluir o sinal da diferença , ou seja, !
+        //quarto  numeroSorteado = Math.floor(Math.random() * 59 + 1);
+        //correto é 60
+
+        function realizarSorteio() {
+            var arrayNumerosSorteados = [];
+            var numeroSorteado = 0;
+            while (arrayNumerosSorteados.length < 6) {
+                numeroSorteado = Math.floor(Math.random() * 60 + 1);
+                if (arrayNumerosSorteados.indexOf(numeroSorteado) === -1) {
+                    arrayNumerosSorteados.push(numeroSorteado);
+                }
+            }
+
+            var arrayNumeroJogados = document.getElementsByName("numerosJogados");
+            var numeroArrayJogado = 0;
+            var arrayNumerosAcertados = [];
+            console.log(arrayNumeroJogados);
+            console.log(arrayNumerosSorteados);
+
+            for (var contador = 0; contador < arrayNumeroJogados.length; contador++) {
+                numeroArrayJogado = parseInt(arrayNumeroJogados[contador].value);
+                if (arrayNumerosSorteados.indexOf(numeroArrayJogado) !== -1) {
+                    arrayNumerosAcertados.push(numeroArrayJogado);
+                }
+            }
+            alert(`Você acertou ${arrayNumerosAcertados.length}`);
+            console.log(`Você acertou os números ${arrayNumerosAcertados}`);
+            //
+
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

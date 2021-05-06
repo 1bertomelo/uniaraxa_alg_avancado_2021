@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <label>Mês:</label>
+        <input id='txtMes' type="text" placeholder="Digite o mês" />
+    </div>
+    <div>
+        <label>Ano:</label>
+        <input id='txtAno' type="number" placeholder="Digite o Ano" />
+    </div>
+    <div>
+        <label>Valor Venda (R$):</label>
+        <input id='txtVenda' type="text" placeholder="Digite o valor de Venda" />
+
+    </div>
+    <div>
+        <label>Valor Despesa (R$):</label>
+        <input id='txtDespesa' type="text" placeholder="Digite o valor de Despesa" />
+    </div>
+    <div>
+        <button onclick="realizarLancamentos()">Lançamento</button>
+    </div>
+    <div>
+        <button onclick="ordernacaoMesASC()">Ordem ASC Mês</button>
+        <button onclick="ordencaoResultadoASC()">Ordem ASC Resultado</button>
+        <button onclick="ordencaoResultadoDESC()">Ordem DESC Resultado</button>
+
+    </div>
+
+    <script>
+        var arrayLancamentos = [];
+
+        function realizarLancamentos() {
+            let mes = document.getElementById("txtMes").value;
+            let ano = parseInt(document.getElementById("txtAno").value);
+            let valorVendido = parseFloat(document.getElementById("txtVenda").value);
+            let valorDespesas = parseFloat(document.getElementById("txtDespesa").value);
+            let resultado = valorVendido - valorDespesas;
+            let status = classificarStatus(resultado);
+            let novoLancamento = { mes, ano, valorVendido, valorDespesas, resultado, status };
+            arrayLancamentos.push(novoLancamento);
+            console.log(arrayLancamentos);
+
+        }
+
+        function classificarStatus(resultado) {
+            if (resultado > 0)
+                return "Positivo";
+            if (resultado < 0)
+                return "Negativo";
+            return "Neutro";
+        }
+
+
+        function ordenarResultadoAsc(lancamentoA, LancamentoB) {
+            if (lancamentoA.resultado > LancamentoB.resultado) {
+                return 1;
+            }
+            if (lancamentoA.resultado < LancamentoB.resultado) {
+                return -1;
+            }
+            return 0;
+        }
+
+        function ordenarResultadoDesc(LancamentoA, LancamentoB) {
+            if (LancamentoA.resultado < LancamentoB.resultado) {
+                return 1;
+            }
+            if (LancamentoA.resultado > LancamentoB.resultado) {
+                return -1;
+            }
+            return 0;
+        }
+
+        function ordenarMesAsc(LancamentoA, LancamentoB) {
+            if (LancamentoA.mes > LancamentoB.mes) {
+                return 1;
+            }
+            if (LancamentoA.mes < LancamentoB.mes) {
+                return -1;
+            }
+            return 0;
+        }
+
+
+        function ordernacaoMesASC() {
+            imprimirTabela(arrayLancamentos.sort(ordenarMesAsc));
+        }
+
+        function ordencaoResultadoASC() {
+            imprimirTabela(arrayLancamentos.sort(ordenarResultadoAsc));
+        }
+
+        function ordencaoResultadoDESC() {
+            imprimirTabela(arrayLancamentos.sort(ordenarResultadoDesc));
+        }
+
+        function imprimirTabela(tabela) {
+            var body = document.getElementsByTagName("body")[0];
+            var tabelaAuxiliar = document.getElementById("tbLancamentos");
+            if (tabelaAuxiliar != null) {
+                tabelaAuxiliar.remove();
+            }
+
+            var tabelaPrioridadeHTML = document.createElement("table");
+            tabelaPrioridadeHTML.id = "tbLancamentos";
+            var tabelaBody = document.createElement("tbody");
+            var tabelaHead = document.createElement("thead");
+
+            var linhaCabecalhoHTML = document.createElement("tr");
+
+            var colunaCabecalhoMesHTML = document.createElement("td");
+            var conteudoCabecalhoMes = document.createTextNode('Mês');
+            colunaCabecalhoMesHTML.appendChild(conteudoCabecalhoMes);
+            linhaCabecalhoHTML.appendChild(colunaCabecalhoMesHTML);
+
+
+            var colunaCabecalhoAnoHTML = document.createElement("td");
+            var conteudoCabecalhoAno = document.createTextNode('Ano');
+            colunaCabecalhoAnoHTML.appendChild(conteudoCabecalhoAno);
+            linhaCabecalhoHTML.appendChild(colunaCabecalhoAnoHTML);
+
+            var colunaCabecalhoVendasHTML = document.createElement("td");
+            var conteudoCabecalhoVendas = document.createTextNode('Vendas');
+            colunaCabecalhoVendasHTML.appendChild(conteudoCabecalhoVendas);
+            linhaCabecalhoHTML.appendChild(colunaCabecalhoVendasHTML);
+
+            var colunaCabecalhoDespesasHTML = document.createElement("td");
+            var conteudoCabecalhoDespesas = document.createTextNode('Despesas');
+            colunaCabecalhoVendasHTML.appendChild(conteudoCabecalhoDespesas);
+            linhaCabecalhoHTML.appendChild(colunaCabecalhoDespesasHTML);
+
+            var colunaCabecalhoReceitaHTML = document.createElement("td");
+            var conteudoCabecalhoReceita = document.createTextNode('Receita');
+            colunaCabecalhoReceitaHTML.appendChild(conteudoCabecalhoReceita);
+            linhaCabecalhoHTML.appendChild(colunaCabecalhoReceitaHTML);
+
+            var colunaCabecalhoStatusHTML = document.createElement("td");
+            var conteudoCabecalhoStatus = document.createTextNode('Status');
+            colunaCabecalhoStatusHTML.appendChild(conteudoCabecalhoStatus);
+            linhaCabecalhoHTML.appendChild(colunaCabecalhoStatusHTML);
+
+            tabelaHead.appendChild(linhaCabecalhoHTML);
+
+            //for para criar n tarefas
+            //10 tarefas 10 tr
+            //5 tarefas 5 tr
+            for (let nrolinha = 0; nrolinha < tabela.length; nrolinha++) {
+                var linhaHTML = document.createElement("tr");
+
+                var colunamesHTML = document.createElement("td");
+                var conteudomes = document.createTextNode(tabela[nrolinha].mes);
+                colunamesHTML.appendChild(conteudomes);
+                linhaHTML.appendChild(colunamesHTML);
+
+
+                var colunaanoHTML = document.createElement("td");
+                var conteudoano = document.createTextNode(tabela[nrolinha].ano);
+                colunaanoHTML.appendChild(conteudoano);
+                linhaHTML.appendChild(colunaanoHTML);
+
+                var colunavalorVendidoHTML = document.createElement("td");
+                var conteudovalorVendido = document.createTextNode(tabela[nrolinha].valorVendido);
+                colunavalorVendidoHTML.appendChild(conteudovalorVendido);
+                linhaHTML.appendChild(colunavalorVendidoHTML);
+
+                var colunavalorDespesasHTML = document.createElement("td");
+                var conteudovalorDespesas = document.createTextNode(tabela[nrolinha].valorDespesas);
+                colunavalorDespesasHTML.appendChild(conteudovalorDespesas);
+                linhaHTML.appendChild(colunavalorDespesasHTML);
+
+                var colunaresultadoHTML = document.createElement("td");
+                var conteudoresultado = document.createTextNode(tabela[nrolinha].resultado);
+                colunaresultadoHTML.appendChild(conteudoresultado);
+                linhaHTML.appendChild(colunaresultadoHTML);
+
+                var colunastatusHTML = document.createElement("td");
+                var conteudostatus = document.createTextNode(tabela[nrolinha].status);
+                colunastatusHTML.appendChild(conteudostatus);
+                linhaHTML.appendChild(colunastatusHTML);
+
+
+
+
+                tabelaBody.appendChild(linhaHTML);
+
+            }
+            tabelaPrioridadeHTML.appendChild(tabelaHead);
+            tabelaPrioridadeHTML.appendChild(tabelaBody);
+            body.appendChild(tabelaPrioridadeHTML);
+            tabelaPrioridadeHTML.setAttribute("border", "1");
+
+
+        }
+
+
+
+
+    </script>
+
+</body>
+
+</html>
