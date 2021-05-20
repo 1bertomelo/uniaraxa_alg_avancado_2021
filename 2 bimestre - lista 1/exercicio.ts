@@ -3,7 +3,7 @@ let inputAltura = document.getElementById('txtAltura') as HTMLInputElement;
 let inputImc = document.getElementById('txtImc') as HTMLInputElement;
 let buttonCalcImc = document.getElementById('btnCalcImc') as HTMLButtonElement;
 
-buttonCalcImc.addEventListener('click', function () {
+buttonCalcImc.addEventListener('click', () => {
     let resultadoImc: number = calcularImc(Number(inputPeso.value), Number(inputAltura.value));
     console.log(resultadoImc);
     inputImc.value = resultadoImc.toFixed(2).toString();
@@ -28,7 +28,7 @@ let inputNome = document.getElementById('txtNome') as HTMLInputElement;
 let inputQtdeVogais = document.getElementById('txtQtdVogais') as HTMLInputElement;
 let buttonContarVogais = document.getElementById('btnContarVogais') as HTMLButtonElement;
 
-buttonContarVogais.addEventListener('click', function () {
+buttonContarVogais.addEventListener('click', () => {
     let resultadoVogais: number = contarVogais(inputNome.value)
     inputQtdeVogais.value = resultadoVogais.toString();
 });
@@ -53,6 +53,4 @@ function contarVogais(nome: string) {
 
     return qtdVogais;
 }
-
-
 

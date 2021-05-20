@@ -46,3 +46,8 @@ function contarVogais(nome) {
     }
     return qtdVogais;
 }
+inputPeso.addEventListener('keydown', function (e) {
+    var key = e.key;
+    console.log(e.key);
+    return (key >= '0' && key <= '9') || key == '+' || key == '(' || key == ')' || key == '-';
+});
