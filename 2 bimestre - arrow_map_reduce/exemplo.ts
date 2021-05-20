@@ -58,3 +58,13 @@ console.log(resultado00);
 let filtroIdade = aluno => aluno.idade < 30;
 let resultadoAlunosAbaixo30Anos = alunos3SIF.filter(filtroIdade);
 console.log(resultadoAlunosAbaixo30Anos);
+
+let soma = 0;
+for (let i: number = 0; i < numerosPares.length; i++) {
+    soma += numerosPares[i];//acumulo
+}
+console.log(soma);
+
+let acumular = (acumulado, n) => acumulado + n;
+let total = numerosPares.reduce(acumular);
+console.log(total);

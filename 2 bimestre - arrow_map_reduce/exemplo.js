@@ -50,3 +50,11 @@ console.log(resultado00);
 var filtroIdade = function (aluno) { return aluno.idade < 30; };
 var resultadoAlunosAbaixo30Anos = alunos3SIF.filter(filtroIdade);
 console.log(resultadoAlunosAbaixo30Anos);
+var soma = 0;
+for (var i = 0; i < numerosPares.length; i++) {
+    soma += numerosPares[i]; //acumulo
+}
+console.log(soma);
+var acumular = function (acumulado, n) { return acumulado + n; };
+var total = numerosPares.reduce(acumular);
+console.log(total);
